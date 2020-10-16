@@ -20,8 +20,8 @@ export const formats = [
                 packs: [
                     { id: 1, description: '1 урок', price: 2150 },
                     { id: 2, description: '2 урока', price: 7800 },
-                    { id: 8, description: '8 уроков', price: 12800 },
-                    { id: 16, description: '16 уроков', price: 24800 }
+                    { id: 8, description: '8 уроков', price: 14400 },
+                    { id: 16, description: '16 уроков', price: 27200 }
                 ]
             },
             {
