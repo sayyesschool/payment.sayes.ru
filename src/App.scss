@@ -1,0 +1,27 @@
+#content {
+    max-width: 1280px;
+    margin: 2rem auto;
+
+    .notice {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+
+#products {
+    .mdc-card {
+        height: 100%;
+
+        .mdc-card__actions {
+            margin-top: auto;
+        }
+    }
+}
+
+#payment-dialog {
+    .mdc-dialog__surface {
+        @media (min-width: 720px) {
+            max-width: 780px;
+        }
+    }
+}

@@ -1,0 +1,46 @@
+#payment-form {
+    .mdc-tab-bar {
+        margin-bottom: 1rem;
+    }
+
+    #type {
+        
+    }
+
+    #pack {
+        .mdc-list-item__meta {
+            font-size: 1.25rem;
+            color: inherit;
+        }
+
+        .mdc-text-field {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+    }
+
+    #customer {
+        .mdc-text-field,
+        .mdc-form-field {
+            margin-bottom: 1rem;
+        }
+    }
+
+    #checkout {
+        .price-label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: auto;
+    
+            strong {
+                font-size: 1.5rem;
+                margin-right: 4px;
+            }
+        }
+    }
+
+    .mdc-button {
+        display: block;
+        margin-left: auto;
+    }
+}
