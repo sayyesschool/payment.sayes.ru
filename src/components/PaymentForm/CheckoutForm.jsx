@@ -1,6 +1,6 @@
 const CheckoutForm = ({ format, pack, amount, customer }) => {
     const description = `${format.title} ${pack?.description || ''}`.trim();
-    const sum = Number(amount || pack.price).toFixed(2);
+    const sum = Number(amount).toFixed(2);
     const custName = `${customer.firstname} ${customer.lastname}`;
     const receipt = JSON.stringify({
         customer: {

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useRef, useCallback, useState } from 'react';
 import {
     Button,
     Icon,
@@ -16,20 +16,44 @@ import CheckoutForm from './CheckoutForm';
 import './index.scss';
 
 const PaymentForm = ({ format }) => {
+    const promocodeFieldRef = useRef();
+
     const [view, setView] = useState(format.types ? 'type' : 'pack');
     const [type, setType] = useState();
     const [pack, setPack] = useState();
     const [customer, setCustomer] = useState();
     const [amount, setAmount] = useState(0);
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [originalAmount, setOriginalAmount] = useState();
+    const [hasDiscount, setHasDiscount] = useState(false);
+
+    const handleAmountChange = useCallback((event, value) => {
+        setAmount(value);
+        setTotalAmount(value);
+        setPack(undefined);
+    }, []);
+
+    const handlePackChange = useCallback(pack => {
+        setPack(pack);
+        setTotalAmount(pack.price);
+    }, []);
 
     const handleCustomerSubmit = useCallback(customer => {
         setCustomer(customer);
         setView('checkout');
     }, []);
 
-    const handleAmountChange = useCallback((event, value) => {
-        setAmount(value);
-        setPack(undefined);
+    const handlePromocode = useCallback(() => {
+        const value = promocodeFieldRef.current.control.value;
+
+        if (value?.toUpperCase() !== 'FAST20') return;
+
+        setTotalAmount(amount => {
+            setOriginalAmount(amount);
+            return amount * 0.8;
+        });
+
+        setHasDiscount(true);
     }, []);
 
     return (
@@ -85,7 +109,7 @@ const PaymentForm = ({ format }) => {
                     <PackList
                         packs={format.packs || type.packs}
                         selectedPack={pack}
-                        onChange={setPack}
+                        onChange={handlePackChange}
                     />
 
                     <Typography element="p" variant="subtitle1">или введите сумму самостоятельно:</Typography>
@@ -116,17 +140,40 @@ const PaymentForm = ({ format }) => {
                     <CheckoutForm
                         format={format}
                         pack={pack}
-                        amount={amount}
+                        amount={totalAmount}
                         customer={customer}
                     />
+
+                    {type &&
+                        <Typography element="h3" variant="headline6" noMargin>{type.description}</Typography>
+                    }
+
+                    {pack &&
+                        <Typography element="p" variant={type ? 'subtitle1' : 'headline6'}>{pack.description}</Typography>
+                    }
 
                     <Typography variant="body1">При нажатии на кнопку <strong>Оплатить</strong> вы будете перенаправлены на сайт платежной системы, где сможете выбрать способ оплаты (Банковские карты, Яндекс.Деньги, Qiwi, Сбербанк, Альфа-Банк, Тинькофф, Apple Pay).</Typography>
 
                     <Typography variant="body2">Нажимая на кнопку <strong>Оплатить</strong> вы принимаете условия <a href="/offer.php" target="_blank">договора-оферты</a>.</Typography>
 
-                    <Layout row>
+                    <Layout row alignItems="center">
+                        <Layout row alignItems="center">
+                            <TextField
+                                ref={promocodeFieldRef}
+                                placeholder="Промокод"
+                                filled
+                                disabled={hasDiscount}
+                            />
+
+                            <Button disabled={hasDiscount} onClick={handlePromocode}>Применить</Button>
+                        </Layout>
+
                         <div className="price-label">
-                            <strong>{amount || pack.price}</strong> руб.
+                            {originalAmount ?
+                                <span><del>{originalAmount}</del> <strong>{totalAmount}</strong> руб.</span>
+                                :
+                                <span><strong>{totalAmount}</strong> руб.</span>
+                            }
                         </div>
 
                         <Button type="submit" form="checkout-form" unelevated>Оплатить</Button>
