@@ -144,19 +144,21 @@ const PaymentForm = ({ format }) => {
                         customer={customer}
                     />
 
-                    {type &&
-                        <Typography element="h3" variant="headline6" noMargin>{type.description}</Typography>
-                    }
+                    <header>
+                        {type &&
+                            <Typography element="h3" variant="headline6" noMargin>{type.description}</Typography>
+                        }
 
-                    {pack &&
-                        <Typography element="p" variant={type ? 'subtitle1' : 'headline6'}>{pack.description}</Typography>
-                    }
+                        {pack &&
+                            <Typography element="p" variant={type ? 'subtitle1' : 'headline6'}>{pack.description}</Typography>
+                        }
+                    </header>
 
                     <Typography variant="body1">При нажатии на кнопку <strong>Оплатить</strong> вы будете перенаправлены на сайт платежной системы, где сможете выбрать способ оплаты (Банковские карты, Яндекс.Деньги, Qiwi, Сбербанк, Альфа-Банк, Тинькофф, Apple Pay).</Typography>
 
                     <Typography variant="body2">Нажимая на кнопку <strong>Оплатить</strong> вы принимаете условия <a href="/offer.php" target="_blank">договора-оферты</a>.</Typography>
 
-                    <Layout row alignItems="center">
+                    <footer row alignItems="center">
                         <Layout row alignItems="center">
                             <TextField
                                 ref={promocodeFieldRef}
@@ -168,16 +170,18 @@ const PaymentForm = ({ format }) => {
                             <Button disabled={hasDiscount} onClick={handlePromocode}>Применить</Button>
                         </Layout>
 
-                        <div className="price-label">
-                            {originalAmount ?
-                                <span><del>{originalAmount}</del> <strong>{totalAmount}</strong> руб.</span>
-                                :
-                                <span><strong>{totalAmount}</strong> руб.</span>
-                            }
-                        </div>
+                        <Layout row alignItems="center">
+                            <div className="price-label">
+                                {originalAmount ?
+                                    <span><del>{originalAmount}</del> <strong>{totalAmount}</strong> руб.</span>
+                                    :
+                                    <span><strong>{totalAmount}</strong> руб.</span>
+                                }
+                            </div>
 
-                        <Button type="submit" form="checkout-form" unelevated>Оплатить</Button>
-                    </Layout>
+                            <Button type="submit" form="checkout-form" unelevated>Оплатить</Button>
+                        </Layout>
+                    </footer>
                 </section>
             }
         </div >
