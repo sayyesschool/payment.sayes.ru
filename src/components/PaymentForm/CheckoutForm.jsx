@@ -20,7 +20,7 @@ const CheckoutForm = ({ format, pack, amount, customer }) => {
     });
 
     return (
-        <form id="checkout-form" method="post" action="https://money.yandex.ru/eshop.xml">
+        <form id="checkout-form" method="post" action="https://yoomoney.ru/eshop.xml">
             <input type="hidden" name="shopId" value="642518" required />
             <input type="hidden" name="scid" value="1263227" required />
             <input type="hidden" name="sum" value={sum} required />
