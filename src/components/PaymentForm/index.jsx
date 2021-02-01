@@ -8,6 +8,8 @@ import {
     Typography
 } from 'mdc-react';
 
+import { PROMOCODE } from '../../data';
+
 import TypeList from './TypeList';
 import PackList from './PackList';
 import CustomerForm from './CustomerForm';
@@ -46,7 +48,7 @@ const PaymentForm = ({ format }) => {
     const handlePromocode = useCallback(() => {
         const value = promocodeFieldRef.current.control.value;
 
-        if (value?.toUpperCase() !== 'FAST20') return;
+        if (value?.toUpperCase() !== PROMOCODE) return;
 
         setTotalAmount(amount => {
             setOriginalAmount(amount);

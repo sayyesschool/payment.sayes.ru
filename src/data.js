@@ -1,3 +1,5 @@
+export const PROMOCODE = 'FAST20';
+
 export const formats = [
     {
         id: 'offline',
@@ -78,9 +80,9 @@ export const formats = [
         title: 'Онлайн в группе',
         description: 'Выберите это обучение, если вы занимаетесь в группе по Zoom',
         packs: [
-            { id: 1, description: '1 месяц обучения (8 занятий)', price: 6500 },
-            { id: 2, description: '2 месяца обучения (16 занятий)', price: 11000 },
-            { id: 3, description: '3 месяца обучения (24 занятия)', price: 15000 }
+            { id: 1, description: '1 месяц обучения (8 занятий)', price: 8000 },
+            { id: 2, description: '3 месяца обучения (24 занятий)', price: 19000 },
+            { id: 3, description: '6 месяца обучения (48 занятия)', price: 31500 }
         ]
     }
 ];
